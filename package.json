@@ -1,11 +1,11 @@
 {
-  "name": "autocomplete-pkg",
-  "version": "1.0.0",
-  "main": "index.js",
+  "name": "autocomplete",
+  "version": "0.1.0",
+  "description": "Trie-based autocomplete library",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc --watch",
-    "test": "jest",
-    "test:watch": "jest --watch"
+    "test": "jest --watch"
   },
   "keywords": [],
   "author": "Morteza Javidi",
