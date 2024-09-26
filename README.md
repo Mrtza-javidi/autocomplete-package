@@ -10,6 +10,10 @@ npm install trie-autocomplete
 
 ## Usage
 
+### Creating an Autocomplete Instance
+
+You can create a new Trie instance for your autocomplete functionality by using the autocomplete() function. Each call to autocomplete() returns a fresh instance, allowing you to have multiple independent autocomplete systems.
+
 ### Adding Phrases
 
 You can add phrases to the autocomplete system using the `addPhrase` method. It accepts two parameters:
@@ -17,10 +21,17 @@ You can add phrases to the autocomplete system using the `addPhrase` method. It 
 - `phrase` (string): The word or phrase you want to add.
 - `priority` (optional, number): The priority of the phrase. Lower numbers have higher priority. If no priority is provided, it defaults to a very low priority.
 
+### Method Chaining
+
+The addPhrase method supports chaining, allowing you to add multiple phrases in a single statement, as shown above.
+
 #### Example:
 
 ```typescript
-import autocomplete from "trie-autocomplete";
+import { autocomplete } from "trie-autocomplete";
+
+// Create a new autocomplete instance
+const nameAutocomplete = autocomplete();
 
 // Adding phrases with optional priority
 autocomplete
@@ -28,23 +39,19 @@ autocomplete
   .addPhrase("ladan", 1.2) // Higher priority than 'laleh'
   .addPhrase("laminor", 2) // Priority 2
   .addPhrase("liana", 1.2); // Same priority as 'ladan'
-
-// Get suggestions for a prefix
-console.log(autocomplete.suggest("mo")); // Returns ['ladan', 'laminor', 'laleh']
+  .addPhrase("lara"); // infinity priority
 ```
 
-Method Chaining
-
-The addPhrase method supports chaining, allowing you to add multiple phrases in a single statement, as shown above.
-
-Getting Suggestions
+### Getting Suggestions
 
 You can retrieve suggestions using the suggest method, which accepts a prefix string and returns an array of words/phrases sorted by priority.
 
+#### Example:
+
 ```typescript
-// Get suggestions for the prefix "mo"
-const suggestions = autocomplete.suggest("mo");
-console.log(suggestions); // Output: ['ladan', 'laminor', 'laleh']
+// Get suggestions for a prefix
+nameAutocomplete.suggest("la");
+// Returns ['ladan', 'liana', 'laminor', 'laleh', 'lara']
 ```
 
 Hope you enjoy using it.
