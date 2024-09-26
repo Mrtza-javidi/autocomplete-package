@@ -1,68 +1,46 @@
-import { autocomplete, addPhrase } from "../index";
+import autocomplete from "../index";
 
 describe("Autocomplete", () => {
-  const words = [
-    "haniyeh",
-    "sadegh",
-    "hossein",
-    "morteza",
-    "mohammad",
-    "hamid",
-    "moghimi",
-    "mohsen",
-    "morteza",
-    "mohammad",
-    "moghimi",
-  ];
-  it('should return the first word or phrase for prefix "mo"', () => {
-    const result = autocomplete("mo", words);
-    expect(result![0]).toBe("morteza");
-  });
-
-  it('should return the first word or phrase for prefix "h"', () => {
-    const result = autocomplete("h", words);
-    expect(result![0]).toBe("haniyeh");
-  });
-
-  it("should return null if no word starts with the given prefix", () => {
-    const result = autocomplete("z", words);
-    expect(result).toBeNull();
+  beforeEach(() => {
+    autocomplete
+      .addPhrase("morteza", 1.5)
+      .addPhrase("mohammad", 1.4)
+      .addPhrase("moghimi", 3)
+      .addPhrase("mohsen")
+      .addPhrase("haleh", 0.5)
+      .addPhrase("hossein", 1)
+      .addPhrase("haniyeh", 2)
+      .addPhrase("hamid")
+      .addPhrase("laleh")
+      .addPhrase("ladan")
+      .addPhrase("laminor")
+      .addPhrase("farhad", 5)
+      .addPhrase("farzaneh", 5)
+      .addPhrase("faezeh", 5);
   });
 
   it("should return the phrase with the highest priority for a given prefix", () => {
-    addPhrase("morteza", 2);
-    addPhrase("mohammad", 1.2);
-    addPhrase("morid", 2);
-
-    const result = autocomplete("mo");
+    const result = autocomplete.suggest("mo");
     expect(result![0]).toEqual("mohammad");
   });
 
-  it("should handle phrases with the same prefix but different priorities", () => {
-    addPhrase("mohammad", 1.2);
-    addPhrase("morteza", 1);
-    addPhrase("morid", 2);
-
-    const result = autocomplete("mo");
-    expect(result![0]).toEqual("morteza");
+  it("should handle both phrases with and without priority", () => {
+    const result = autocomplete.suggest("ha");
+    expect(result![0]).toEqual("haleh");
   });
 
-  it("should handle both phrases with and without priority", () => {
-    addPhrase("morteza", 1);
-    addPhrase("mohammad", 1.2);
-    addPhrase("morid", 2);
-    addPhrase("hossein");
-    addPhrase("haniyeh");
+  it("should return the first phrase between a couple of them without any priority", () => {
+    const result = autocomplete.suggest("l");
+    expect(result![0]).toEqual("laleh");
+  });
 
-    const result = autocomplete("mo");
-    expect(result![0]).toEqual("morteza");
+  it("should return the first phrase between a couple of them with same priorities", () => {
+    const result = autocomplete.suggest("fa");
+    expect(result![0]).toEqual("farhad");
   });
 
   it("should return null if no word starts with the given prefix", () => {
-    addPhrase("haniyeh");
-    addPhrase("sadegh");
-
-    const result = autocomplete("z");
+    const result = autocomplete.suggest("z");
     expect(result).toBeNull();
   });
 });
