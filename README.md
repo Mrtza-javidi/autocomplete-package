@@ -12,7 +12,7 @@ npm install trie-autocomplete
 
 ### Adding Phrases
 
-You can add phrases to the autocomplete system using the `addPhrase` function. It accepts two parameters:
+You can add phrases to the autocomplete system using the `addPhrase` method. It accepts two parameters:
 
 - `phrase` (string): The word or phrase you want to add.
 - `priority` (optional, number): The priority of the phrase. Lower numbers have higher priority. If no priority is provided, it defaults to a very low priority.
@@ -20,14 +20,31 @@ You can add phrases to the autocomplete system using the `addPhrase` function. I
 #### Example:
 
 ```typescript
-import { addPhrase, autocomplete } from "trie-autocomplete";
+import autocomplete from "trie-autocomplete";
 
 // Adding phrases with optional priority
-addPhrase("morteza", 1); // High priority
-addPhrase("mohammad", 1.2); // Lower priority than 'morteza'
-addPhrase("morid", 2); // Lowest priority
-addPhrase("ali"); // Default priority (infinity)
+autocomplete
+  .addPhrase("laleh", 3) // Priority 3
+  .addPhrase("ladan", 1.2) // Higher priority than 'laleh'
+  .addPhrase("laminor", 2) // Priority 2
+  .addPhrase("liana", 1.2); // Same priority as 'ladan'
 
 // Get suggestions for a prefix
-console.log(autocomplete("mo")); // Returns ['morteza', 'mohammad', 'morid']
+console.log(autocomplete.suggest("mo")); // Returns ['ladan', 'laminor', 'laleh']
 ```
+
+Method Chaining
+
+The addPhrase method supports chaining, allowing you to add multiple phrases in a single statement, as shown above.
+
+Getting Suggestions
+
+You can retrieve suggestions using the suggest method, which accepts a prefix string and returns an array of words/phrases sorted by priority.
+
+```typescript
+// Get suggestions for the prefix "mo"
+const suggestions = autocomplete.suggest("mo");
+console.log(suggestions); // Output: ['ladan', 'laminor', 'laleh']
+```
+
+Hope you enjoy using it.
