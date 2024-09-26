@@ -7,16 +7,16 @@ export class Trie {
     this.root = new TrieNode();
   }
 
-  addPhrase(word: string, priority: number | null = null): Trie {
+  addPhrase(phrase: string, priority: number | null = null): Trie {
     let node = this.root;
-    word.split("").forEach((char) => {
+    phrase.split("").forEach((char) => {
       if (!node.children[char]) {
         node.children[char] = new TrieNode();
       }
       node = node.children[char];
     });
 
-    node.isEndOfWord = true;
+    node.isEndOfPhrase = true;
     node.priority = priority !== null ? priority : Infinity;
     return this;
   }
@@ -30,19 +30,19 @@ export class Trie {
     });
     if (!found) return null;
 
-    const suggestions: { word: string; priority: number }[] = [];
+    const suggestions: { phrase: string; priority: number }[] = [];
     this.collectSuggestions(node, prefix, suggestions);
     suggestions.sort((a, b) => a.priority - b.priority);
-    return suggestions.map((suggestion) => suggestion.word);
+    return suggestions.map((suggestion) => suggestion.phrase);
   }
 
   private collectSuggestions(
     node: TrieNode,
     prefix: string,
-    suggestions: { word: string; priority: number }[]
+    suggestions: { phrase: string; priority: number }[]
   ): void {
-    if (node.isEndOfWord)
-      suggestions.push({ word: prefix, priority: node.priority! });
+    if (node.isEndOfPhrase)
+      suggestions.push({ phrase: prefix, priority: node.priority! });
 
     Object.keys(node.children).forEach((char) => {
       this.collectSuggestions(node.children[char], prefix + char, suggestions);

@@ -1,13 +1,13 @@
 export default class TrieNode {
   children: { [key: string]: TrieNode };
 
-  isEndOfWord: boolean;
+  isEndOfPhrase: boolean;
 
   priority: number | null;
 
   constructor() {
     this.children = {};
-    this.isEndOfWord = false;
+    this.isEndOfPhrase = false;
     this.priority = null;
   }
 }
