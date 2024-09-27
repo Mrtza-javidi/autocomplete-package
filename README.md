@@ -1,11 +1,11 @@
-# Trie Autocomplete Library
+# Autocomplete
 
 This library implements a prefix tree (Trie) for word suggestions and autocomplete functionality.
 
 ## Installation
 
 ```bash
-npm install trie-autocomplete
+npm install autocompletable
 ```
 
 ## Usage
@@ -53,5 +53,7 @@ You can retrieve suggestions using the suggest method, which accepts a prefix st
 nameAutocomplete.suggest("la");
 // Returns ['ladan', 'liana', 'laminor', 'laleh', 'lara']
 ```
+
+The project is open-source and I welcome contributions from the community!
 
 Hope you enjoy using it.
