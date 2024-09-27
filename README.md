@@ -28,7 +28,7 @@ The addPhrase method supports chaining, allowing you to add multiple phrases in 
 #### Example:
 
 ```typescript
-import { autocomplete } from "trie-autocomplete";
+import { autocomplete } from "autocompletable";
 
 // Create a new autocomplete instance
 const nameAutocomplete = autocomplete();
