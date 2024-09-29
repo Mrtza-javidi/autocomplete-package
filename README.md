@@ -12,7 +12,7 @@ npm install autocompletable
 
 ### Creating an Autocomplete Instance
 
-You can create a new Trie instance for your autocomplete functionality by using the autocomplete() function. Each call to autocomplete() returns a fresh instance, allowing you to have multiple independent autocomplete systems.
+You can create a new instance for your autocomplete functionality by using the autocomplete() function. Each call to autocomplete() returns a fresh instance, allowing you to have multiple independent autocomplete systems.
 
 ### Adding Phrases
 
@@ -23,7 +23,7 @@ You can add phrases to the autocomplete system using the `addPhrase` method. It 
 
 ### Method Chaining
 
-The addPhrase method supports chaining, allowing you to add multiple phrases in a single statement, as shown above.
+The `addPhrase` method supports chaining, allowing you to add multiple phrases in a single statement.
 
 #### Example:
 
@@ -34,7 +34,7 @@ import { autocomplete } from "autocompletable";
 const nameAutocomplete = autocomplete();
 
 // Adding phrases with optional priority
-autocomplete
+nameAutocomplete
   .addPhrase("laleh", 3) // Priority 3
   .addPhrase("ladan", 1.2) // Higher priority than 'laleh'
   .addPhrase("laminor", 2) // Priority 2
@@ -44,7 +44,7 @@ autocomplete
 
 ### Getting Suggestions
 
-You can retrieve suggestions using the suggest method, which accepts a prefix string and returns an array of words/phrases sorted by priority.
+You can retrieve suggestions using the `suggest` method, which accepts a prefix string and returns an array of words/phrases sorted by priority.
 
 #### Example:
 
@@ -54,6 +54,6 @@ nameAutocomplete.suggest("la");
 // Returns ['ladan', 'liana', 'laminor', 'laleh', 'lara']
 ```
 
-The project is open-source and I welcome contributions from the community!
+The project is open-source and contributions from the community are welcome.
 
 Hope you enjoy using it.
