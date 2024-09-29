@@ -1,4 +1,4 @@
-# Autocomplete
+# Autocompletable
 
 This library implements a prefix tree (Trie) for word suggestions and autocomplete functionality.
 
